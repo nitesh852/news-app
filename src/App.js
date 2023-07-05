@@ -1,23 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Item from "./components/item";
+import "./App.css";
 
 function App() {
+  const [newsItems, setNewsItems] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl =
+          " https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=8040cc3829fe453497ac472a132141d8";
+        const response = await axios.get(apiUrl);
+        setNewsItems(response.data?.articles || []);
+        console.log("news", response.data?.articles);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container pt-5">
+      <div className="row">
+        <h1 className="heading">Latest News</h1>
+        <div className="col-md-12 order-md-2 col-lg-12">
+          <div className="container-fluid">
+            <div className="row">
+              {newsItems.map((item, index) => (
+                <Item key={index} item={item} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

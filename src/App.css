@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,40 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+body {
+  background: #f8f9fa;
+  
+}
+
+.heading{
+  text-align: center;
+  width: 100%;
+  margin:20px
+}
+
+.listImage {
+  width: 90%;
+}
+
+.card-img-top {
+  text-align: center;
+}
+a.no-underline {
+  text-decoration: none; /* Remove the underline */
+  color: black;
+  text-transform: uppercase;
+}
+
+a.no-underline:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.card-price {
+  text-align: center;
+  color: orange;
+}
+h4.card-title {
+  text-align: center;
 }
